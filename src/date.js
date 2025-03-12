@@ -60,7 +60,8 @@ const getAge = (millis) => {
 	return new Date(diff).getFullYear() - 1970;
 };
 
-export const printDateInfo = (millis) => {
+export const printDateInfo = (day, month, year) => {
+	const millis = Date.parse(`${year}-${month}-${day}`);
 	const isLeapYearLabel = isLeapYear(millis) ? "Да" : "Нет";
 
 	console.log(`День недели ............... ${getWeekDay(millis)}`);

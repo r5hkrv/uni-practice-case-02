@@ -12,46 +12,55 @@ const closeOnError = () => {
 };
 
 rl.question("Введите день вашего рождения: ", (ans) => {
-	const day = parseInt(ans);
+	const day = ans;
+	const dayN = parseInt(ans);
 
-	if (day !== day || day < 1 || day > 31) {
+	if (dayN !== dayN) {
 		closeOnError();
+
+		return;
+	} else if (dayN < 1 || dayN > 31) {
+		console.log("Пожалуйста, вводите значения от 1 до 31");
+		rl.close();
 
 		return;
 	}
 
 	rl.question("Введите месяц вашего рождения: ", (ans) => {
-		const monthNum = parseInt(ans);
-		const monthIndex = monthNum !== monthNum ? parseMonth(ans) : -1;
-		let month;
+		let month = ans;
+		const monthN = parseInt(ans);
+		const monthIndex = monthN !== monthN ? parseMonth(ans) : -1;
 
-		if (monthNum >= 1 && monthNum <= 12) month = monthNum;
-		if (monthIndex !== -1) month = monthIndex + 1;
-
-		if (month === undefined) {
+		if (monthIndex !== -1) {
+			month = `${monthIndex + 1}`;
+		} else if (monthN !== monthN) {
 			closeOnError();
+
+			return;
+		} else if (monthN < 1 || monthN > 12) {
+			console.log("Пожалуйста, вводите значения от 1 до 12");
+			rl.close();
 
 			return;
 		}
 
 		rl.question("Введите год вашего рождения: ", (ans) => {
-			const year = parseInt(ans);
+			const year = ans;
+			const yearN = parseInt(ans);
 			const currYear = new Date(Date.now()).getFullYear();
 
-			if (year !== year) {
+			if (yearN !== yearN) {
 				closeOnError();
 
 				return;
-			}
-
-			if (year < 100 || year >= currYear) {
-				console.log("Пожалуйста, вводите значения от 100 до 2024 лет");
+			} else if (yearN < 100 || yearN > currYear - 1) {
+				console.log("Пожалуйста, вводите значения от 100 до 2024");
 				rl.close();
 
 				return;
 			}
 
-			printDateInfo(Date.parse(`${year}-${month}-${day}`));
+			printDateInfo(day, month, year);
 
 			rl.close();
 		});
