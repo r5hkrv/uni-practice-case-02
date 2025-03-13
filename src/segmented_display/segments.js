@@ -74,10 +74,6 @@ class SegmentsBuilder {
 	build() {
 		return this.segments;
 	}
-
-	static Builder() {
-		return new SegmentsBuilder();
-	}
 }
 
 export const Numbers = {
